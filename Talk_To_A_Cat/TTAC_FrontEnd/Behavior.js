@@ -28,7 +28,7 @@ function LogMyMessage() {
 }
 
 function LogCatMessage() { //requests a reply from the server and logs it to the chat
-    fetch('https://Talk-To-A-Cat.onrender.com/chat', { //go to this server
+    fetch('https://talk-to-a-cat-backend.onrender.com', { //go to this server
         method: 'POST', // Way of transmition : post the message to the server
         headers: { // lables that tell the server what kind of data is being sent
             'Content-Type': 'application/json' // talk in json language
