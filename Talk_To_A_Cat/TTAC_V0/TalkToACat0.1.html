@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <title>Talk To A Cat</title>
+    <meta name="description content=Cat that talks in morse code">
+
+    
+    <style>
+
+    /* Change all sizes px -> % later */
+
+    body {
+        background-color: whitesmoke;
+    }
+
+    .Header { 
+        /*Dimentions+Color*/
+        font-size: 72px;
+        width: 100%;
+        height: 100px;
+        background: white;
+        color:palevioletred;
+
+        text-align: center;
+        
+        /*Attaches button placement to screen*/
+        position: fixed;
+        top: 0px;
+        left: 0px;
+    }
+
+    .SendButton {
+        /*Dimentions+Color*/
+        font-size: 40px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: palevioletred;
+        color:white;
+
+        /*Center Text: the first line trigers aligne commands
+        the 2 others are the align commandes on both axis*/
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        /*mouse➔hand when touching this object*/
+        cursor: pointer;
+        
+        /*Attaches button placement to screen*/
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .TextBox {
+        /* Dimensions */
+        width: 300px;
+        height: 50px;
+        font-size: 20px;
+
+        /*Attaches TextBox placement to screen*/
+        position: fixed;
+        bottom: 25px;
+        left: 20px;
+    }
+
+    .Input {
+        /* Dimentions+Color */
+    width: 200px;
+    height: 200px;
+    background-color: palevioletred;
+    
+    /* Centering temporary feture*/
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    
+    /* Starts off hidden */
+    display: none; 
+    }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="Header">Talk To A Cat !</div> 
+    
+    <input type="text" class="TextBox" placeholder="Type here...">
+
+    <div class="SendButton">➔</div>
+
+    <div class="Input"></div>
+
+    <script> // When button clicked, displays Message 
+        // Identifies tese variables
+        const button = document.querySelector('.SendButton');
+        const box = document.querySelector('.Input');
+        const inputField = document.querySelector('.TextBox');
+
+        // If clicked
+        button.addEventListener('click', function() {
+            // .ChatInput->string
+            let userInput = inputField.value;
+            // If there are characters in TextBox
+            if (userInput.trim() !== "") {
+                // This value is put into the html of Input
+                box.innerText = userInput;
+                // Change the CSS display: 'none'->'block'
+                box.style.display = 'block';
+                // Erases TextBox
+                inputField.value = "";
+            }else{
+                inputField.value = "";
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

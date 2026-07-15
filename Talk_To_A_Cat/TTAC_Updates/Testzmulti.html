@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <title>Talk To A Cat</title>
+    <meta name="description content=Cat that talks in morse code">
+
+    
+    <style>
+
+    /* Change all sizes px -> % later */
+
+    body {
+        background-color: whitesmoke;
+    }
+
+    .Header { 
+        /*Dimentions+Color*/
+        font-size: 32px;
+        width: 100%;
+        height: 50px;
+        background: white;
+        color:palevioletred;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        /*Attaches button placement to screen*/
+        position: fixed;
+        top: 0px;
+        left: 0px;
+    }
+
+    .SendButton {
+        /*Dimentions+Color*/
+        font-size: 40px;
+        width: calc(50px * var(--Multi));
+        height: calc(50px * var(--Multi));
+        border-radius: 50%;
+        background: palevioletred;
+        color:white;
+
+        /*Center Text: the first line trigers aligne commands
+        the 2 others are the align commandes on both axis*/
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        /*mouse➔hand when touching this object*/
+        cursor: pointer;
+        
+        /*Attaches button placement to screen*/
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .TextBox {
+        /* Dimensions */
+        width: calc((1px * var(--Width)) - (50px * var(--Multi)));
+        height: calc(50px * var(--Multi));
+        font-size: 20px;
+
+        /*Attaches TextBox placement to screen*/
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+    }
+
+    .ChatLog {
+        /*A parent objet, manages a cutoff before the header*/
+        margin-top: 120px; 
+        margin-bottom: 80px;
+    }
+    
+    .MyMessage { 
+        /*Dimentions+Color*/
+        width: 90%;
+        border-radius: 0%;/*round off the corners later*/
+        padding: 15px;
+        background-color: palevioletred;
+        color: white;
+
+        /*adds row if long messages surpase box dimentions*/
+        word-wrap: break-word;
+    }
+
+    .CatMessage { 
+        /*Dimentions+Color*/
+        width: 90%;
+        border-radius: 0%;/*round off the corners later*/
+        padding: 15px;
+        background-color: pink;
+        color: white;
+
+        /*adds row if long messages surpase box dimentions*/
+        word-wrap: break-word;
+    }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="Header">Talk To A Cat !</div> 
+    
+    <input type="text" class="TextBox" placeholder="Type here...">
+
+    <div class="SendButton">➔</div>
+
+    <div class="ChatLog"></div> 
+
+    <script src="Behavior.js"></script>
+
+    <script>// calculating multipliers for objects according to screen size
+        function Resize() {
+        // gets num of pixels in width  of the screen
+        let ScreenWidth = window.innerWidth;
+
+        // Applies multi to a css var
+        document.documentElement.style.setProperty('--Width', ScreenWidth);
+
+        // Calculates the multi
+        let Multi = ScreenWidth / 1000;
+
+        // Applies multi to a css var
+        document.documentElement.style.setProperty('--Multi', Multi);
+        }
+
+        Resize();
+
+        //runs every time the window gets resied
+        window.addEventListener('resize')
+    </script>
+
+</body>
+
+</html>
