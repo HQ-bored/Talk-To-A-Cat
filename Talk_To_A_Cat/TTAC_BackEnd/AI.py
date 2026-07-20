@@ -78,7 +78,7 @@ def chat():
     # Encode response 
     print("Raw AI Response:", CatsResponse)
     #new
-    if CatsResponse == "404 : The cat stares at you blankly":
+    if CatsResponse == "*error *The cat stares at you blankly.*":
         pass # pass=do nothing continue=go back to top of loop
     else:
         CatsResponse = RunCatEncoder(CatsResponse)
