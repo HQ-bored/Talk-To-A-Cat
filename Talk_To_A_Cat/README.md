@@ -18,9 +18,9 @@ This project was started on June 30, 2026. Hopefully, it will be finished by the
 ---Looks : HTML+CSS---
 [X] Basic Chat Interface 
     ( title header, textbox, send button, message boxes)
-[ ] Making Interface Scale With Screen Size 
+[X] Making Interface Scale With Screen Size 
     ( by using % )
-[ ] Social Media Style Interface  
+[X] Social Media Style Interface  
     ( rounded speech bubbles, 2-column alignement, user icons)
 
 ---Functionality : JS+Python---

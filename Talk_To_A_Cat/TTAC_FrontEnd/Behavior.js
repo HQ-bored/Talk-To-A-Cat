@@ -1,45 +1,92 @@
-// Defines these Variables
 const SendButton = document.querySelector('.SendButton');
 const TextBox = document.querySelector('.TextBox'); 
 const ChatLog = document.querySelector('.ChatLog'); 
-// When clicked
+
+// Selects wich url to get the AI.py from
+let BASE_URL;
+if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+    BASE_URL = "http://127.0.0.1:5000"; 
+} else {
+    BASE_URL = "https://talk-to-a-cat-backend.onrender.com"; 
+}
+
+//new
+fetch(`${BASE_URL}/start-chat`, { // send this command to AI.py via json
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    }
+})
+.then(response => { 
+    if (!response.ok) { // like the 500 error
+        //fail message
+        const newMsg = document.createElement('div');
+        newMsg.className = 'MyMessage';
+        newMsg.innerText = "I can't find the cat... let me look again... \n *error: Chat session initiation failed. Please refresh the page.";
+        ChatLog.appendChild(newMsg);
+    }
+    return response.json(); 
+})
+.then(data => {
+    // Detect your specific 404 message from the python file
+    if (data.status === "Chat Session Initiated!") {
+        //cat intro
+        const catMsg = document.createElement('div');
+        catMsg.className = 'CatMessage'; 
+        catMsg.innerText = "hh mMII hH mMMeeooow MmMmeEO hh MmMmEEEooOwWwwHhh MMmiimmmMi MmMMIIIhhH mMIiiaaaAooWwWwm mmMmIIIhHh Miiiih mMmiiAAaooooW mMMmeEewwMmMmi \n (I am a wise cat. I could give you advice... for the right price.)";
+        ChatLog.appendChild(catMsg); 
+    }
+})
+.catch(err => { // Triggers if the backend is entirely offline/unreachable
+    /*
+    const newMsg = document.createElement('div');
+    newMsg.className = 'MyMessage';
+    newMsg.innerText = "I can't find the cat... let me look again... \n *error: Backend unreachable or bad Wifi. Please try again later.";
+    ChatLog.appendChild(newMsg); 
+    The strat-chat does not work yet so im putting this as a temporary band-aid for now*/
+    // temp cat intro
+        const catMsg = document.createElement('div');
+        catMsg.className = 'CatMessage'; 
+        catMsg.innerText = "hh mMII hH mMMeeooow MmMmeEO hh MmMmEEEooOwWwwHhh MMmiimmmMi MmMMIIIhhH mMIiiaaaAooWwWwm mmMmIIIhHh Miiiih mMmiiAAaooooW mMMmeEewwMmMmi \n (I am a wise cat. I could give you advice... for the right price.)";
+        ChatLog.appendChild(catMsg); 
+});
+//new end
+
 SendButton.addEventListener('click', function() {
-    
-    if (TextBox.value.trim() !== "") { // !== means "is not equal to"
+    if (TextBox.value.trim() !== "") { 
         LogMyMessage();
         LogCatMessage(); 
-        // Erases TextBox 
-        TextBox.value = "";
         
+        TextBox.value = "";
     } else {
         TextBox.value = "";
     }
 });
 
 function LogMyMessage() {
-    // Creates a new <div> 
     const newMsg = document.createElement('div');
-    // Applies MessageBlock CSS rules onto it
     newMsg.className = 'MyMessage';
-    // Adds the text from our snapshot
     newMsg.innerText = TextBox.value;
-    // Makes it a Child of ChatLog
     ChatLog.appendChild(newMsg);
+    // scrolls to bottom of chatlog
+    ChatLog.scrollTop = ChatLog.scrollHeight;
 }
 
-function LogCatMessage() { //requests a reply from the server and logs it to the chat
-    fetch('https://talk-to-a-cat-backend.onrender.com/chat', { //go to this server
-        method: 'POST', // Way of transmition : post the message to the server
-        headers: { // lables that tell the server what kind of data is being sent
-            'Content-Type': 'application/json' // talk in json language
+function LogCatMessage() { 
+    fetch(`${BASE_URL}/chat`, { // talks to this url using json
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ message: TextBox.value }) // send the message in json format
+        body: JSON.stringify({ message: TextBox.value })
     })
-    .then(response => response.json()) // when response is received and convert it to json
-    .then(data => { // when the data is received
-        const catMsg = document.createElement('div');// create a new div for the cat's message
-        catMsg.className = 'CatMessage'; // use the CatMessage class
-        catMsg.innerText = data.reply; // extracts anwser from the data bundle so {"reply": "... --- ..."} -> "... --- ..."
-        ChatLog.appendChild(catMsg); // set this div as a child of ChatLog
+    .then(response => response.json()) // convert received response to json
+    .then(data => { // when data received
+        const catMsg = document.createElement('div');
+        catMsg.className = 'CatMessage'; 
+        catMsg.innerText = data.reply;
+        ChatLog.appendChild(catMsg); 
+
+        ChatLog.scrollTop = ChatLog.scrollHeight;
     });
 }
