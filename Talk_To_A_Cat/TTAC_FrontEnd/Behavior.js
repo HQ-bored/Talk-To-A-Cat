@@ -63,6 +63,13 @@ SendButton.addEventListener('click', function() {
     }
 });
 
+TextBox.addEventListener('keydown', function(event) { 
+    if (event.key === 'Enter') {
+        event.preventDefault(); //prevents addind a \n like the default browser behavior
+        SendButton.click();
+    }
+});
+
 function LogMyMessage() {
     const newMsg = document.createElement('div');
     newMsg.className = 'MyMessage';

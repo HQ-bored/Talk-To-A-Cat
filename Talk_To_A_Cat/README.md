@@ -27,7 +27,7 @@ This project was started on June 30, 2026. Hopefully, it will be finished by the
 [X] Functional Chat Log, Textbox And Send Button
 [X] Upload Onto Google
 [X] Encode The Cat's Response
-[ ] A Help Button That Shows The Decoded Response
+[X] A Help Button That Shows The Decoded Response
 
 ---AI Features : Python---
 [X] Link An AI That Sends A Response As A Cat
