@@ -30,11 +30,16 @@ fetch(`${BASE_URL}/start-chat`, { // send this command to AI.py via json
 .then(data => {
     // Detect your specific 404 message from the python file
     if (data.status === "Chat Session Initiated!") {
-        //cat intro
+        // intro
         const catMsg = document.createElement('div');
         catMsg.className = 'CatMessage'; 
         catMsg.innerText = "hh mMII hH mMMeeooow MmMmeEO hh MmMmEEEooOwWwwHhh MMmiimmmMi MmMMIIIhhH mMIiiaaaAooWwWwm mmMmIIIhHh Miiiih mMmiiAAaooooW mMMmeEewwMmMmi \n (I am a wise cat. I could give you advice... for the right price.)";
         ChatLog.appendChild(catMsg); 
+
+        const newMsg = document.createElement('div');
+        newMsg.className = 'MyMessage'; 
+        newMsg.innerText = "Well, ig i gotta figure out what this cat is yapping about...";
+        ChatLog.appendChild(newMsg);
     }
 })
 .catch(err => { // Triggers if the backend is entirely offline/unreachable
@@ -44,11 +49,16 @@ fetch(`${BASE_URL}/start-chat`, { // send this command to AI.py via json
     newMsg.innerText = "I can't find the cat... let me look again... \n *error: Backend unreachable or bad Wifi. Please try again later.";
     ChatLog.appendChild(newMsg); 
     The strat-chat does not work yet so im putting this as a temporary band-aid for now*/
-    // temp cat intro
+    // temp intro
         const catMsg = document.createElement('div');
         catMsg.className = 'CatMessage'; 
         catMsg.innerText = "hh mMII hH mMMeeooow MmMmeEO hh MmMmEEEooOwWwwHhh MMmiimmmMi MmMMIIIhhH mMIiiaaaAooWwWwm mmMmIIIhHh Miiiih mMmiiAAaooooW mMMmeEewwMmMmi \n (I am a wise cat. I could give you advice... for the right price.)";
-        ChatLog.appendChild(catMsg); 
+        ChatLog.appendChild(catMsg);
+        
+        const newMsg = document.createElement('div');
+        newMsg.className = 'MyMessage'; 
+        newMsg.innerText = "Well, ig i gotta figure out what this cat is yapping about...";
+        ChatLog.appendChild(newMsg);
 });
 //new end
 
